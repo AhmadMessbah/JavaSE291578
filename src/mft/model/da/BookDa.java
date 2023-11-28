@@ -8,6 +8,7 @@ import java.util.List;
 public class BookDa implements Da<Book> {
     @Override
     public Book save(Book book) throws Exception {
+        Book book1 = new Book();
         return null;
     }
 
