@@ -3,6 +3,7 @@ package mft;
 import mft.controller.PersonController;
 import mft.model.da.PersonDa;
 import mft.model.entity.Person;
+import mft.model.entity.User;
 
 import java.util.Scanner;
 
