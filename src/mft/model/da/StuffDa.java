@@ -1,10 +1,11 @@
-package mft.model.da.impl;
+package mft.model.da;
 
+import mft.model.da.impl.Da;
 import mft.model.entity.Stuff;
 
 import java.util.List;
 
-public class StuffDa implements Da<Stuff>{
+public class StuffDa implements Da<Stuff> {
     @Override
     public Stuff save(Stuff stuff) throws Exception {
         return null;
