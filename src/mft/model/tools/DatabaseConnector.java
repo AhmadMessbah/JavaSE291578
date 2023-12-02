@@ -9,8 +9,8 @@ public class DatabaseConnector {
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(
                 "jdbc:oracle:thin:@localhost:1521:xe",
-                "aryan_drv",
-                "drvdrv461017"
+                "javase",
+                "java123"
         );
     }
 }
