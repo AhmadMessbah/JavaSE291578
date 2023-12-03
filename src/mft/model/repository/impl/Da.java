@@ -1,4 +1,4 @@
-package mft.model.da.impl;
+package mft.model.repository.impl;
 
 import java.util.List;
 

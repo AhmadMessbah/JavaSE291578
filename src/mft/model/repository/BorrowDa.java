@@ -1,6 +1,6 @@
-package mft.model.da;
+package mft.model.repository;
 
-import mft.model.da.impl.Da;
+import mft.model.repository.impl.Da;
 import mft.model.entity.Book;
 import mft.model.entity.Borrow;
 import mft.model.entity.Person;

@@ -1,6 +1,6 @@
-package mft.model.da;
+package mft.model.repository;
 
-import mft.model.da.impl.Da;
+import mft.model.repository.impl.Da;
 import mft.model.entity.User;
 import mft.model.tools.JdbcProvider;
 

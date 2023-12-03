@@ -1,6 +1,6 @@
 package mft.controller;
 
-import mft.model.da.UserDa;
+import mft.model.repository.UserDa;
 import mft.model.entity.User;
 
 import java.util.regex.Pattern;

@@ -1,8 +1,6 @@
 package mft.controller;
 
-import mft.model.da.PersonDa;
-import mft.model.da.StuffDa;
-import mft.model.entity.Person;
+import mft.model.repository.StuffDa;
 import mft.model.entity.Stuff;
 
 import java.util.regex.Pattern;

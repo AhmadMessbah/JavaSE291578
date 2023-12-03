@@ -1,13 +1,8 @@
 package mft;
 
-import mft.controller.PersonController;
 import mft.controller.UserController;
-import mft.model.da.PersonDa;
-import mft.model.da.UserDa;
-import mft.model.entity.Person;
+import mft.model.repository.UserDa;
 import mft.model.entity.User;
-
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
