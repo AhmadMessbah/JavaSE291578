@@ -1,9 +1,8 @@
 package mft.model.da;
 
 import mft.model.da.impl.Da;
-import mft.model.entity.Person;
 import mft.model.entity.Stuff;
-import mft.model.tools.DatabaseConnector;
+import mft.model.tools.JdbcProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +16,7 @@ public class StuffDa implements Da<Stuff> {
     private Connection connection;
     @Override
     public Stuff save(Stuff stuff) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
           "select STUFF_SEQ.nextval as stuff_id from DUAL"
         );
@@ -40,7 +39,7 @@ public class StuffDa implements Da<Stuff> {
 
     @Override
     public Stuff edit(Stuff stuff) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
           "update STUFF_TBL set NAME = ? , BRAND = ? , GROUP_TITLE = ? where ID = ?"
         );
@@ -57,7 +56,7 @@ public class StuffDa implements Da<Stuff> {
 
     @Override
     public Stuff remove(int id) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "delete from STUFF_TBL where ID = ?"
         );
@@ -71,7 +70,7 @@ public class StuffDa implements Da<Stuff> {
 
     @Override
     public List<Stuff> findAll() throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "select * from STUFF_TBL"
         );
@@ -97,7 +96,7 @@ public class StuffDa implements Da<Stuff> {
 
     @Override
     public Stuff findById(int id) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
           "select * from STUFF_TBL where ID = ?"
         );
@@ -121,7 +120,7 @@ public class StuffDa implements Da<Stuff> {
     }
 
     public List<Stuff> findByGroupTitle(String groupTitle)  throws Exception{
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "select * from STUFF_TBL where GROUP_TITLE = ?"
         );

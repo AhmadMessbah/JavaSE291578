@@ -2,7 +2,7 @@ package mft.model.da;
 
 import mft.model.da.impl.Da;
 import mft.model.entity.Person;
-import mft.model.tools.DatabaseConnector;
+import mft.model.tools.JdbcProvider;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class PersonDa implements Da<Person> {
 
     @Override
     public Person save(Person person) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT PERSON_SEQ.nextval AS NEXT_ID FROM DUAL"
         );
@@ -36,7 +36,7 @@ public class PersonDa implements Da<Person> {
 
     @Override
     public Person edit(Person person) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "UPDATE PERSON_TBL SET NAME=?, FAMILY=? WHERE ID=?"
         );
@@ -51,7 +51,7 @@ public class PersonDa implements Da<Person> {
 
     @Override
     public Person remove(int id) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "DELETE FROM PERSON_TBL WHERE ID=?"
         );
@@ -64,7 +64,7 @@ public class PersonDa implements Da<Person> {
 
     @Override
     public List<Person> findAll() throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM PERSON_TBL"
         );
@@ -89,7 +89,7 @@ public class PersonDa implements Da<Person> {
 
     @Override
     public Person findById(int id) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM PERSON_TBL WHERE ID=?"
         );
@@ -112,7 +112,7 @@ public class PersonDa implements Da<Person> {
     }
 
     public List<Person> findByFamily( String family) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
             "SELECT * FROM PERSON_TBL WHERE FAMILY=?"
         );

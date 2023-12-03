@@ -2,7 +2,7 @@ package mft.model.da;
 
 import mft.model.da.impl.Da;
 import mft.model.entity.User;
-import mft.model.tools.DatabaseConnector;
+import mft.model.tools.JdbcProvider;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User save(User user) throws Exception {
-        connection= DatabaseConnector.getConnection();
+        connection= JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT USER_SEQ.nextval AS NEXT_ID FROM DUAL"
         );
@@ -41,7 +41,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User edit(User user) throws Exception {
-        connection= DatabaseConnector.getConnection();
+        connection= JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "UPDATE USER_TBL SET USERNAME=? ,PASSWORD=? ,ACTIVE=? WHERE ID=?"
         );
@@ -58,7 +58,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User remove(int id) throws Exception {
-        connection= DatabaseConnector.getConnection();
+        connection= JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "Delete FROM USER_TBL WHERE ID=?"
         );
@@ -72,7 +72,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public List<User> findAll() throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL"
         );
@@ -96,7 +96,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User findById(int id) throws Exception {
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE ID=?"
         );
@@ -120,7 +120,7 @@ public class UserDa implements Da<User> {
     }
 
     public User findByUsername(String username) throws Exception{
-        connection = DatabaseConnector.getConnection();
+        connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE USERNAME=?"
         );
