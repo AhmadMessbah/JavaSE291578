@@ -17,7 +17,7 @@ create sequence book_seq start with 1 increment by 1;
 create table user_tbl
 (
     id       number primary key,
-    username nvarchar2(30),
+    username nvarchar2(30) UNIQUE ,
     password nvarchar2(30),
     active   number(1)
 );
