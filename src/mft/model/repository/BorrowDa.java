@@ -6,6 +6,7 @@ import mft.model.entity.Borrow;
 import mft.model.entity.Person;
 import mft.model.tools.JdbcProvider;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
@@ -14,11 +15,12 @@ import java.util.List;
 
 public class BorrowDa implements Da<Borrow> {
     PreparedStatement preparedStatement;
+    Connection connection;
 
     @Override
     public Borrow save(Borrow borrow) throws Exception {
-        JdbcProvider.getConnection();
-        preparedStatement = JdbcProvider.getConnection().prepareStatement(
+       connection = JdbcProvider.getConnection();
+        preparedStatement = connection.prepareStatement(
                 "select borrow_seq.nextval as NEXT_BORROW_ID from dual"
         );
 
@@ -43,9 +45,9 @@ public class BorrowDa implements Da<Borrow> {
     @Override
     public Borrow edit(Borrow borrow) throws Exception {
         // todo : change Edit Code
-        JdbcProvider.getConnection();
+        connection = JdbcProvider.getConnection();
 
-        preparedStatement = JdbcProvider.getConnection().prepareStatement(
+        preparedStatement = connection.prepareStatement(
                 "update borrow_tbl  SET    borrow_TimeStamp = ? , return_TimeStamp = ?  where  borrow_tbl.id =? "
         );
         preparedStatement.setTimestamp(1, Timestamp.valueOf(borrow.getBorrowTimeStamp()));
@@ -59,9 +61,9 @@ public class BorrowDa implements Da<Borrow> {
 
     @Override
     public Borrow remove(int id) throws Exception {
-        JdbcProvider.getConnection();
+       connection=  JdbcProvider.getConnection();
 
-        preparedStatement = JdbcProvider.getConnection().prepareStatement(
+        preparedStatement = connection.prepareStatement(
                 "delete from borrow_tbl  where id = ?  "
         );
 
@@ -74,9 +76,9 @@ public class BorrowDa implements Da<Borrow> {
 
     @Override
     public List<Borrow> findAll() throws Exception {
-        JdbcProvider.getConnection();
+       connection =  JdbcProvider.getConnection();
 
-        preparedStatement = JdbcProvider.getConnection().prepareStatement(
+        preparedStatement = connection.prepareStatement(
                 "select * from borrow_tbl , person_tbl , book_tbl where borrow_tbl.person_id = person_tbl.id and borrow_tbl.book_id = book_tbl.id"
 
         );
@@ -113,9 +115,9 @@ public class BorrowDa implements Da<Borrow> {
 
     @Override
     public Borrow findById(int id) throws Exception {
-        JdbcProvider.getConnection();
+       connection =  JdbcProvider.getConnection();
 
-        preparedStatement = JdbcProvider.getConnection().prepareStatement(
+        preparedStatement = connection.prepareStatement(
                 "select * from borrow_tbl , person_tbl , book_tbl  where borrow_tbl.person_id = person_tbl.id and borrow_tbl.book_id = book_tbl.id and borrow_tbl.id = ?"
         );
         preparedStatement.setInt(1, id);
@@ -153,6 +155,6 @@ public class BorrowDa implements Da<Borrow> {
 
     private void close() throws Exception {
         preparedStatement.close();
-        JdbcProvider.getConnection().close();
+        connection.close();
     }
 }
