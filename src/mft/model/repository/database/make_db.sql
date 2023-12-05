@@ -1,3 +1,4 @@
+salam
 create table person_tbl
 (
     id     number primary key,
