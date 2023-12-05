@@ -18,6 +18,7 @@ public class UserDa implements Da<User> {
     @Override
     public User save(User user) throws Exception {
         connection= JdbcProvider.getConnection();
+        System.out.println("UserRepository - Save");
         preparedStatement = connection.prepareStatement(
                 "SELECT USER_SEQ.nextval AS NEXT_ID FROM DUAL"
         );
@@ -41,6 +42,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User edit(User user) throws Exception {
+        System.out.println("UserRepository - Edit");
         connection= JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "UPDATE USER_TBL SET USERNAME=? ,PASSWORD=? ,ACTIVE=? WHERE ID=?"
@@ -58,6 +60,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public User remove(int id) throws Exception {
+        System.out.println("UserRepository - Remove");
         connection= JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "Delete FROM USER_TBL WHERE ID=?"
@@ -72,6 +75,7 @@ public class UserDa implements Da<User> {
 
     @Override
     public List<User> findAll() throws Exception {
+        System.out.println("UserRepository - FindAll");
         connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL"
@@ -96,13 +100,13 @@ public class UserDa implements Da<User> {
 
     @Override
     public User findById(int id) throws Exception {
+        System.out.println("UserRepository - FindById");
         connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE ID=?"
         );
         preparedStatement.setInt(1,id);
         ResultSet resultSet=preparedStatement.executeQuery();
-        List<User> userList = new ArrayList<>();
 
         User user=null;
         while (resultSet.next()){
@@ -120,13 +124,13 @@ public class UserDa implements Da<User> {
     }
 
     public User findByUsername(String username) throws Exception{
+        System.out.println("UserRepository - FindByUsername");
         connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
                 "SELECT * FROM USER_TBL WHERE USERNAME=?"
         );
         preparedStatement.setString(1,username);
         ResultSet resultSet=preparedStatement.executeQuery();
-        List<User> userList = new ArrayList<>();
 
         User user=null;
         while (resultSet.next()){

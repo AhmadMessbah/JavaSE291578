@@ -1,9 +1,6 @@
 package mft.model.entity;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor
@@ -14,7 +11,11 @@ import lombok.experimental.SuperBuilder;
 
 public class User {
     private int id;
+
+    @Setter(AccessLevel.NONE)
     private String username;
+
     private String password;
+
     private boolean active;
 }

@@ -1,8 +1,11 @@
 package mft;
 
+import mft.controller.PersonController;
 import mft.controller.UserController;
 import mft.model.repository.UserDa;
 import mft.model.entity.User;
+
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
@@ -29,25 +32,19 @@ public class Main {
 //        System.out.println(PersonController.save(name, family));
 
 //------------------------------------------------
+        System.out.println("UserView");
+        Scanner scanner = new Scanner(System.in);
 
-          User user= User.builder().username("farnoosh").password("12396564").active(true).build();
-        System.out.println(UserController.save(user.getUsername(), user.getPassword(), user.isActive()));
+        System.out.print("Enter Username : ");
+        String username = scanner.nextLine();
 
-          UserDa userDa = new UserDa();
-//          userDa.save(user);
-//          System.out.println(user + " Saved");
+        System.out.print("Enter Password : ");
+        String password = scanner.nextLine();
 
-//          User user1= User.builder().id(1).username("leila").password("546645").active(false).build();
-//          userDa.edit(user1);
-//          System.out.println(user1 + " Edited");
+        System.out.print("Enter Status(true/false) : ");
+        boolean active = Boolean.parseBoolean(scanner.nextLine());
 
-//          userDa.remove(2);
-//          System.out.println("User id : 2 Removed");
-
-//        System.out.println(userDa.findAll());
-//        System.out.println(userDa.findById(3));
-//        System.out.println(userDa.findByUsername("farnoosh"));
-
+        UserController.save(username,password,active);
 
 
     }
