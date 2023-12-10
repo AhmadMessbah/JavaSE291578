@@ -30,12 +30,12 @@ public class BookDa implements Da<Book> {
                 "insert into BOOK_TBL(ID, title,author) values (?,?,?)"
         );
         preparedStatement.setInt(1,book.getId());
-        preparedStatement.setString(2,book.gettitle());
-        preparedStatement.setString(3,book.getouther());
+        preparedStatement.setString(2,book.getTitle());
+        preparedStatement.setString(3,book.getAuthor()uther());
         preparedStatement.execute();
 
         close();
-        return Book();
+        return null;
     }
 
 
