@@ -102,7 +102,7 @@ public class BookDa implements Da<Book> {
     public Book findById(int id) throws Exception {
         connection = JdbcProvider.getConnection();
         preparedStatement = connection.prepareStatement(
-                "select * from STUFF_TBL where ID = ?"
+                "select * from BOOK_TBL where ID = ?"
         );
         preparedStatement.setInt(1,id);
         ResultSet resultSet = preparedStatement.executeQuery();
