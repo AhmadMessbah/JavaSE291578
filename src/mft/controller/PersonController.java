@@ -28,7 +28,7 @@ public class PersonController {
                             .gender(gender)
                             .active(active)
                             .build();
-
+            System.out.println(person);
             PersonService.getService().save(person);
             return person;
         } catch (Exception e) {
