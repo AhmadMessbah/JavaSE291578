@@ -16,7 +16,7 @@ public class BookController {
                         Book book = Book.builder().title(title).author(author).build();
 
                     BookDa bookDa = new bookDa();
-                    bookDa.save(book);
+                    bookDa.save(Book);
                     return Book();
                 }
             } catch (Exception e) {
