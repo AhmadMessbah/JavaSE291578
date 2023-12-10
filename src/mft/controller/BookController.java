@@ -11,13 +11,14 @@ public class BookController {
 
         public static Book save(String title, String author) {
             try {
-                if (Pattern.matches("^[a-zA-Z\\s]{3,30}$", title) &&
+                if ( Book book;
+                Pattern.matches("^[a-zA-Z\\s]{3,30}$", title) &&
                         Pattern.matches("^[a-zA-Z\\s]{3,30}$", author) && {
                         Book book = Book.builder().title(title).author(author).build();
 
                     BookDa bookDa = new bookDa();
                     bookDa.save(Book);
-                    return Book();
+                    return book;
                 }
             } catch (Exception e) {
                 System.out.println("Error : " + e.getMessage());

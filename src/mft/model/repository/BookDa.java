@@ -31,7 +31,7 @@ public class BookDa implements Da<Book> {
         );
         preparedStatement.setInt(1,book.getId());
         preparedStatement.setString(2,book.getTitle());
-        preparedStatement.setString(3,book.getAuthor()uther());
+        preparedStatement.setString(3,book.getAuthor());
         preparedStatement.execute();
 
         close();
@@ -83,10 +83,10 @@ public class BookDa implements Da<Book> {
 
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        List<book> bookList = new ArrayList<>();
+        List<Book> bookList = new ArrayList<>();
         while (resultSet.next()){
-            book book =
-                    book
+            Book book =
+                    Book
                             .builder()
                             .id(resultSet.getInt("ID"))
                             .title(resultSet.getString("title"))
