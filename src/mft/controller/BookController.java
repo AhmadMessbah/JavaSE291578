@@ -8,8 +8,17 @@ import mft.model.repository.StuffDa;
 import java.util.regex.Pattern;
 
 public class BookController {
+    private static BookController controller = new BookController();
 
-    public static Book save(String title, String author) {
+    private BookController() {
+    }
+
+    public static BookController getController() {
+        return controller;
+    }
+
+
+    public Book save(String title, String author) {
         try {
             if (Pattern.matches("^[a-zA-Z\\s]{3,30}$", title) &&
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", author)) {
@@ -25,10 +34,10 @@ public class BookController {
         return null;
     }
 
-    public static Book edit(String title, String author) {
+    public Book edit(String title, String author) {
         try {
             if (Pattern.matches("^[a-zA-Z\\s]{3,30}$", title) &&
-                    Pattern.matches("^[a-zA-Z\\s]{3,30}$", author) &&)){
+                    Pattern.matches("^[a-zA-Z\\s]{3,30}$", author)) {
                 Book book = Book.builder().title(title).author(author).build();
 
                 BookDa bookDa = new BookDa();

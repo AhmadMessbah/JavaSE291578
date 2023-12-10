@@ -12,71 +12,57 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-public class BookDa implements Da<Book> {
+
+public class BookDa implements Da<Book>,AutoCloseable {
     private PreparedStatement preparedStatement;
     private Connection connection;
+
     @Override
-    public Book save(Book Book) throws Exception {
-        connection = JdbcProvider.getConnection();
+    public Book save(Book book) throws Exception {
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "select book_SEQ.nextval as book_id from DUAL"
         );
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        Book book;
         book.setId(resultSet.getInt("book_id"));
 
         preparedStatement = connection.prepareStatement(
                 "insert into BOOK_TBL(ID, title,author) values (?,?,?)"
         );
-        preparedStatement.setInt(1,book.getId());
-        preparedStatement.setString(2,book.getTitle());
-        preparedStatement.setString(3,book.getAuthor());
+        preparedStatement.setInt(1, book.getId());
+        preparedStatement.setString(2, book.getTitle());
+        preparedStatement.setString(3, book.getAuthor());
         preparedStatement.execute();
-
-        close();
-        return null;
+        return book;
     }
-
-
 
     @Override
     public Book edit(Book book) throws Exception {
-
-
-            connection = JdbcProvider.getConnection();
-            preparedStatement = connection.prepareStatement(
-                    "update BOOK_TBL set TITLE = ? , AUTHOR = ?  where ID = ?"
-            );
-            preparedStatement.setString(1,book.getTitle());
-            preparedStatement.setString(2,book.getAuthor());
-
-
-            preparedStatement.execute();
-            close();
-
-            return book;
-
+        connection = JdbcProvider.getJdbcProvider().getConnection();
+        preparedStatement = connection.prepareStatement(
+                "update BOOK_TBL set TITLE = ? , AUTHOR = ?  where ID = ?"
+        );
+        preparedStatement.setString(1, book.getTitle());
+        preparedStatement.setString(2, book.getAuthor());
+        preparedStatement.execute();
+        return book;
     }
 
     @Override
     public Book remove(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "delete from BOOK_TBL where ID = ?"
         );
-
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
-
-        close();
         return null;
-
     }
 
     @Override
     public List<Book> findAll() throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "select * from BOOK_TBL"
         );
@@ -84,7 +70,7 @@ public class BookDa implements Da<Book> {
         ResultSet resultSet = preparedStatement.executeQuery();
 
         List<Book> bookList = new ArrayList<>();
-        while (resultSet.next()){
+        while (resultSet.next()) {
             Book book =
                     Book
                             .builder()
@@ -93,23 +79,22 @@ public class BookDa implements Da<Book> {
                             .author(resultSet.getString("author"))
                             .build();
             bookList.add(book);
-
         }
-        close();
         return bookList;
     }
+
     @Override
     public Book findById(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
-                "select * from BOOK_TBL where ID = ?"
+                "select * from BOOK_TBL WHERE ID=?"
         );
-        preparedStatement.setInt(1,id);
+        preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
 
-        Book Book = null;
+        Book book = null;
         while (resultSet.next()) {
-            Book =
+            book =
                     Book
                             .builder()
                             .id(resultSet.getInt("ID"))
@@ -117,13 +102,11 @@ public class BookDa implements Da<Book> {
                             .author(resultSet.getString("author"))
                             .build();
         }
-        close();
-        return Book;
-
-
-        
+        return book;
     }
-    private void close() throws SQLException {
+
+    @Override
+    public void close() throws Exception {
         preparedStatement.close();
         connection.close();
     }

@@ -11,12 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StuffDa implements Da<Stuff> {
+public class StuffDa implements Da<Stuff>,AutoCloseable {
     private PreparedStatement preparedStatement;
     private Connection connection;
     @Override
     public Stuff save(Stuff stuff) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
           "select STUFF_SEQ.nextval as stuff_id from DUAL"
         );
@@ -32,14 +32,12 @@ public class StuffDa implements Da<Stuff> {
         preparedStatement.setString(3,stuff.getBrand());
         preparedStatement.setString(4,stuff.getGroupTitle());
         preparedStatement.execute();
-
-        close();
         return stuff;
     }
 
     @Override
     public Stuff edit(Stuff stuff) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
           "update STUFF_TBL set NAME = ? , BRAND = ? , GROUP_TITLE = ? where ID = ?"
         );
@@ -49,28 +47,24 @@ public class StuffDa implements Da<Stuff> {
         preparedStatement.setInt(4,stuff.getId());
 
         preparedStatement.execute();
-        close();
-
         return stuff;
     }
 
     @Override
     public Stuff remove(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "delete from STUFF_TBL where ID = ?"
         );
 
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
-
-        close();
         return null;
     }
 
     @Override
     public List<Stuff> findAll() throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "select * from STUFF_TBL"
         );
@@ -88,15 +82,13 @@ public class StuffDa implements Da<Stuff> {
                             .brand(resultSet.getString("GROUP_TITLE"))
                             .build();
             stuffList.add(stuff);
-
         }
-        close();
         return stuffList;
     }
 
     @Override
     public Stuff findById(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
           "select * from STUFF_TBL where ID = ?"
         );
@@ -114,13 +106,11 @@ public class StuffDa implements Da<Stuff> {
                             .brand(resultSet.getString("GROUP_TITLE"))
                             .build();
         }
-        close();
         return stuff;
-
     }
 
     public List<Stuff> findByGroupTitle(String groupTitle)  throws Exception{
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
                 "select * from STUFF_TBL where GROUP_TITLE = ?"
         );
@@ -141,10 +131,10 @@ public class StuffDa implements Da<Stuff> {
             stuffList.add(stuff);
 
         }
-        close();
         return stuffList;
     }
-    private void close() throws SQLException {
+    @Override
+    public void close() throws Exception {
         preparedStatement.close();
         connection.close();
     }

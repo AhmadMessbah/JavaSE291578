@@ -6,9 +6,17 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class JdbcProvider {
-    //  todo : best practice --> Singleton
-    private static BasicDataSource basicDataSource = new BasicDataSource();
-    public static Connection getConnection() throws SQLException {
+    private static JdbcProvider jdbcProvider = new JdbcProvider();
+    private BasicDataSource basicDataSource = new BasicDataSource();
+
+    private JdbcProvider() {
+    }
+
+    public static JdbcProvider getJdbcProvider() {
+        return jdbcProvider;
+    }
+
+    public  Connection getConnection() throws SQLException {
         basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
         basicDataSource.setUsername("javase");

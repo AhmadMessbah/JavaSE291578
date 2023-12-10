@@ -13,8 +13,7 @@ public class StuffController {
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", groupTitle)) {
                 Stuff stuff = Stuff.builder().name(name).brand(brand).groupTitle(groupTitle).build();
 
-                StuffDa stuffDa = new StuffDa();
-                stuffDa.save(stuff);
+//                StuffService.getService.save(stuff);
                 return stuff;
             }
         } catch (Exception e) {
@@ -30,8 +29,8 @@ public class StuffController {
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", groupTitle)) {
                 Stuff stuff = Stuff.builder().name(name).brand(brand).groupTitle(groupTitle).build();
 
-                StuffDa stuffDa = new StuffDa();
-                stuffDa.save(stuff);
+//                StuffDa stuffDa = new StuffDa();
+//                stuffDa.save(stuff);
                 return stuff;
             }
         } catch (Exception e) {

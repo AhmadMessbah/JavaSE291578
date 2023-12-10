@@ -19,7 +19,7 @@ public class UserController {
                                 .active(active)
                                 .build();
 
-                UserService.save(user);
+                UserService.getService().save (user);
                 System.out.println("User Saved : " + user.toString());
             }else {
                 System.out.println("Invalid Username/Password");

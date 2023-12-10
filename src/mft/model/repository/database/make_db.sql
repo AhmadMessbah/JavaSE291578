@@ -2,7 +2,10 @@ create table person_tbl
 (
     id     number primary key,
     name   nvarchar2(30),
-    family nvarchar2(30)
+    family nvarchar2(30),
+    birth_date date,
+    gender varchar(6),
+    active number(1)
 );
 create sequence person_seq start with 1 increment by 1;
 
