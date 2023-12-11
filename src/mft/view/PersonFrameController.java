@@ -34,7 +34,7 @@ public class PersonFrameController implements Initializable {
         }
         genderCmb.getSelectionModel().select(0);
 
-        EventHandler eventHandler = new EventHandler() {
+        EventHandler saveEventHandler = new EventHandler() {
             @Override
             public void handle(Event event) {
                 RadioButton radioButton = (RadioButton) activeToggleGroup.getSelectedToggle();
@@ -50,6 +50,35 @@ public class PersonFrameController implements Initializable {
             }
         };
 
-        saveBtn.setOnAction(eventHandler);
+        saveBtn.setOnAction(saveEventHandler);
+
+        EventHandler editEventHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                RadioButton radioButton = (RadioButton) activeToggleGroup.getSelectedToggle();
+
+                PersonController.getController().edit(
+                        Integer.valueOf(idTxt.getText()),
+                        nameTxt.getText(),
+                        familyTxt.getText(),
+                        birthDate.getValue(),
+                        Gender.valueOf(genderCmb.getSelectionModel().getSelectedItem()),
+                        (radioButton.getText().equals("Enable")?true:false)
+                );
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person Edit");
+            }
+        };
+        editBtn.setOnAction(editEventHandler);
+        EventHandler romoveEventHandler = new EventHandler() {
+            @Override
+            public void handle(Event event) {
+
+                PersonController.getController().remove(
+                        Integer.valueOf(idTxt.getText())
+                );
+                Alert alert = new Alert(Alert.AlertType.INFORMATION, "Person Remove");
+            }
+        };
+        removeBtn.setOnAction(romoveEventHandler);
     }
 }
