@@ -133,6 +133,29 @@ public class StuffDa implements Da<Stuff>,AutoCloseable {
         }
         return stuffList;
     }
+
+    public List<Stuff> findByName(String name)  throws Exception{
+        connection = JdbcProvider.getJdbcProvider().getConnection();
+        preparedStatement = connection.prepareStatement(
+                "select * from STUFF_TBL where NAME = ? "
+        );
+        preparedStatement.setString(1,name);
+
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<Stuff> stuffList = new ArrayList<>();
+        while (resultSet.next()){
+            Stuff stuff =
+                    Stuff
+                            .builder()
+                            .id(resultSet.getInt("ID"))
+                            .name(resultSet.getString("Name"))
+                            .brand(resultSet.getString("BRAND"))
+                            .brand(resultSet.getString("GROUP_TITLE"))
+                            .build();
+            stuffList.add(stuff);
+        }
+        return stuffList;
+    }
     @Override
     public void close() throws Exception {
         preparedStatement.close();
