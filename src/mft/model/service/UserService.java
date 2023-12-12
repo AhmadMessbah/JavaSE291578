@@ -33,7 +33,14 @@ public class UserService {
 
     public User remove(int id) throws Exception {
         try (UserDa userDa = new UserDa()) {
-            return userDa.remove(id);
+            User user= userDa.findById(id);
+            if (user != null){
+                userDa.remove(id);
+                return user;
+            }
+            else {
+                return null;
+            }
         }
     }
 
@@ -46,6 +53,12 @@ public class UserService {
     public User findById(int id) throws Exception {
         try (UserDa userDa = new UserDa()) {
             return userDa.findById(id);
+        }
+    }
+
+    public User findByUsername(String username) throws Exception {
+        try (UserDa userDa = new UserDa()) {
+            return userDa.findByUsername(username);
         }
     }
 }

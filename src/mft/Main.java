@@ -32,19 +32,6 @@ public class Main {
 //        System.out.println(PersonController.save(name, family));
 
 //------------------------------------------------
-        System.out.println("UserView");
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter Username : ");
-        String username = scanner.nextLine();
-
-        System.out.print("Enter Password : ");
-        String password = scanner.nextLine();
-
-        System.out.print("Enter Status(true/false) : ");
-        boolean active = Boolean.parseBoolean(scanner.nextLine());
-
-        UserController.save(username,password,active);
 
 
     }

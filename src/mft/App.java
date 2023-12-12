@@ -12,5 +12,10 @@ public class App extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Person Info");
         primaryStage.show();
+
+//        Scene scene1 = new Scene(FXMLLoader.load(getClass().getResource("view/userFrame.fxml")));
+//        primaryStage.setScene(scene1);
+//        primaryStage.setTitle("User Info");
+//        primaryStage.show();
     }
 }
