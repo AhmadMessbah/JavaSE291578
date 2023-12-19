@@ -7,6 +7,12 @@ import java.util.regex.Pattern;
 
 public class ReceiptController {
 
+    private static ReceiptController controller = new ReceiptController();
+    private ReceiptController(){}
+
+    public static ReceiptController getController() {
+        return controller;
+    }
     public static void save(int id, int amount, String description) {
         System.out.println("ReceiptController - Save");
         try {
@@ -20,7 +26,7 @@ public class ReceiptController {
                                 .amount(amount)
                                 .description(description)
                                 .build();
-                ReceiptService.save(receipt);
+ReceiptService.getService().save(receipt);
                 System.out.println("Receipt Saved : " + receipt.toString());
             } else {
                 System.out.println("Invalid Data");

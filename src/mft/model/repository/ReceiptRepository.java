@@ -9,13 +9,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ReceiptRepository {
+public class ReceiptRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement statement;
 
-    public void save(Receipt receipt) throws Exception {
+
+    public Receipt save(Receipt receipt) throws Exception {
         System.out.println("ReceiptRepository - save");
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "SELECT RECEIPT_SEQ.nextval AS NEXT_ID FROM DUAL"
         );
@@ -30,12 +31,12 @@ public class ReceiptRepository {
         statement.setInt(2, receipt.getAmount());
         statement.setString(3, receipt.getDescription());
         statement.execute();
-        close();
 
+        return receipt;
     }
-    public void edit(Receipt receipt) throws Exception {
+    public Receipt edit(Receipt receipt) throws Exception {
         System.out.println("ReceiptRepository - edit");
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
 "update receipt_tbl  SET Amount=?, Description=? WHERE ID=?"
         );
@@ -43,24 +44,23 @@ public class ReceiptRepository {
         statement.setString(2, receipt.getDescription());
         statement.setInt(3, receipt.getId());
         statement.execute();
-        close();
+        return receipt;
+
     }
 
 
     public void remove(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "DELETE FROM receipt_tbl WHERE ID=?"
         );
         statement.setInt(1, id);
         statement.execute();
-        close();
-
     }
 
 
-    public void findAll() throws Exception {
-        connection = JdbcProvider.getConnection();
+    public List<Receipt> findAll() throws Exception {
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "SELECT * FROM receipt_tbl"
         );
@@ -78,14 +78,12 @@ public class ReceiptRepository {
                             .build();
             Receiptlist.add(receipt);
         }
-
-        close();
-
+        return  Receiptlist;
     }
 
  
-    public void findById(int id) throws Exception {
-        connection = JdbcProvider.getConnection();
+    public  Receipt findById(int id) throws Exception {
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "SELECT * FROM receipt_tbl WHERE ID=?"
         );
@@ -102,12 +100,12 @@ public class ReceiptRepository {
                             .description(resultSet.getString("description"))
                             .build();
         }
-        close();
 
+        return receipt;
     }
-    public void findByAmount(int amount) throws Exception {
+    public Receipt findByAmount(int amount) throws Exception {
         System.out.println("ReceiptRepository-FindByAmount");
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
     statement = connection.prepareStatement(
 "SELECT * FROM receipt_tbl WHERE amount=?"
         );
@@ -122,11 +120,11 @@ if (resultSet.next()){
  .description(resultSet.getString("description"))
  .build();
         }
-        close();
+return receipt;
     }
     public Receipt findByDescription(String description) throws Exception {
         System.out.println("RecpectRepository - FindByDescraption");
-        connection = JdbcProvider.getConnection();
+        connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "SELECT * FROM RECEIPT_TBL WHERE description=?"
         );
