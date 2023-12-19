@@ -15,6 +15,7 @@ public class Receipt {
     public int id;
     public int amount;
     public String description;
+    public Boolean active;
  public String toString(){
      Gson gson=new Gson();
      return gson.toJson(this);

@@ -1,0 +1,29 @@
+ReceiptFrameController<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight=" -Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="346.0" prefWidth="292.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mft.view.ReceiptFrameController">
+   <children>
+      <Label layoutX="25.0" layoutY="39.0" text="Id:" />
+      <Label layoutX="25.0" layoutY="72.0" text="Amount:" />
+      <Label layoutX="23.0" layoutY="104.0" text="description:" />
+      <TextField fx:id="idTxt" layoutX="111.0" layoutY="35.0" />
+      <TextField fx:id="amountTxt" layoutX="111.0" layoutY="68.0" />
+      <TextField fx:id="descriptionTxt" layoutX="111.0" layoutY="100.0" />
+      <Button fx:id="saveBtn" layoutX="22.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Save" />
+      <Button fx:id="editBtn" layoutX="109.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Edit" />
+      <Button fx:id="removeBtn" layoutX="197.0" layoutY="276.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="63.0" text="Remove" />
+      <Label layoutX="24.0" layoutY="141.0" text="Active:" />
+      <RadioButton fx:id="enableRdo" layoutX="111.0" layoutY="141.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="87.0" selected="true" text="Enable">
+         <toggleGroup>
+            <ToggleGroup fx:id="activeToggleGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton fx:id="disableRdo" layoutX="199.0" layoutY="141.0" mnemonicParsing="false" selected="true" text="Disable" toggleGroup="$activeToggleGroup" />
+   </children>
+</Pane>

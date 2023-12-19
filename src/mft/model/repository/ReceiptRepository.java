@@ -49,13 +49,14 @@ public class ReceiptRepository implements AutoCloseable {
     }
 
 
-    public void remove(int id) throws Exception {
+    public Receipt remove(int id) throws Exception {
         connection = JdbcProvider.getJdbcProvider().getConnection();
         statement = connection.prepareStatement(
                 "DELETE FROM receipt_tbl WHERE ID=?"
         );
         statement.setInt(1, id);
         statement.execute();
+        return null;
     }
 
 
@@ -103,7 +104,7 @@ public class ReceiptRepository implements AutoCloseable {
 
         return receipt;
     }
-    public Receipt findByAmount(int amount) throws Exception {
+    public Receipt findByAmount(Integer amount) throws Exception {
         System.out.println("ReceiptRepository-FindByAmount");
         connection = JdbcProvider.getJdbcProvider().getConnection();
     statement = connection.prepareStatement(

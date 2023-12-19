@@ -14,6 +14,7 @@ create table receipt_tbl
 );
 create sequence receipt_seq start with 1 increment by 1;
 
+
 create table book_tbl
 (
     id     number primary key,
