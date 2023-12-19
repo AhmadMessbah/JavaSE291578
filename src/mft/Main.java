@@ -61,11 +61,11 @@ public class Main {
         //String description = scanner.nextLine();
 
         //System.out.print(ReceiptController.save(amount ,description));
-        Receipt receipt =  Receipt
-               .builder().id(2)
-                .amount(String.valueOf(369))
-               .description("PrAr").build();
-          ReceiptDa receiptDa=new ReceiptDa();
+     //   Receipt receipt =  Receipt
+           //    .builder().id(2)
+             //   .amount(String.valueOf(369))
+             //  .description("PrAr").build();
+          //ReceiptDa receiptDa=new ReceiptDa();
         //receiptDa.edit(receipt);
         //System.out.println(receipt + " Edited");
       //  receiptDa.remove(3);

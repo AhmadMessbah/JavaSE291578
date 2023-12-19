@@ -1,6 +1,5 @@
 package mft.model.service;
 
-import mft.controller.exception.DuplicateDescriptionException;
 import mft.model.entity.Receipt;
 import mft.model.repository.ReceiptRepository;
 
