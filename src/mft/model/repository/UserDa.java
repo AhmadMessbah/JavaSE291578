@@ -86,6 +86,30 @@ public class UserDa implements Da<User>, AutoCloseable {
         return userList;
     }
 
+    public List<User> findByAll(String username ) throws Exception {
+        connection = JdbcProvider.getJdbcProvider().getConnection();
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE USERNAME LIKE ? "
+        );
+//        preparedStatement.setString(1, id);
+        preparedStatement.setString(1, username+"%");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        List<User> userList = new ArrayList<>();
+
+        while (resultSet.next()) {
+            User user =
+                    User
+                            .builder()
+                            .id(resultSet.getInt("ID"))
+                            .username(resultSet.getString("USERNAME"))
+                            .password(resultSet.getString("PASSWORD"))
+                            .active(resultSet.getBoolean("ACTIVE"))
+                            .build();
+            userList.add(user);
+        }
+        return userList;
+    }
+
     @Override
     public User findById(int id) throws Exception {
         connection = JdbcProvider.getJdbcProvider().getConnection();
@@ -115,6 +139,29 @@ public class UserDa implements Da<User>, AutoCloseable {
                 "SELECT * FROM USER_TBL WHERE USERNAME=?"
         );
         preparedStatement.setString(1, username);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        User user = null;
+        while (resultSet.next()) {
+            user =
+                    User
+                            .builder()
+                            .id(resultSet.getInt("ID"))
+                            .username(resultSet.getString("USERNAME"))
+                            .password(resultSet.getString("PASSWORD"))
+                            .active(resultSet.getBoolean("ACTIVE"))
+                            .build();
+        }
+        return user;
+    }
+
+    public User findByUsernameAndPassword(String username, String password) throws Exception {
+        connection = JdbcProvider.getJdbcProvider().getConnection();
+        preparedStatement = connection.prepareStatement(
+                "SELECT * FROM USER_TBL WHERE USERNAME=? AND PASSWORD=?"
+        );
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
         ResultSet resultSet = preparedStatement.executeQuery();
 
         User user = null;
