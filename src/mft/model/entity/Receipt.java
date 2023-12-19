@@ -13,6 +13,6 @@ import lombok.experimental.SuperBuilder;
 @ToString
 public class Receipt {
     private int id;
-    private int amount;
+    private String amount;
     private String description;
 }

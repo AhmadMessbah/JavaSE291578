@@ -2,12 +2,17 @@ create table person_tbl
 (
     id     number primary key,
     name   nvarchar2(30),
-    family nvarchar2(30),
-    birth_date date,
-    gender varchar(6),
-    active number(1)
+    family nvarchar2(30)
 );
 create sequence person_seq start with 1 increment by 1;
+
+create table receipt_tbl
+(
+    id   number primary key,
+    amount  number(3),
+    description nvarchar2(300)
+);
+create sequence receipt_seq start with 1 increment by 1;
 
 create table book_tbl
 (
@@ -26,13 +31,6 @@ create table user_tbl
 );
 create sequence user_seq start with 1 increment by 1;
 
-create table receipt_tbl
-(
-    id          number primary key,
-    amount      int,
-    description nvarchar2(100)
-);
-create sequence receipt_seq start with 1 increment by 1;
 
 create table stuff_tbl
 (
