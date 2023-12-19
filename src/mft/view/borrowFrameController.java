@@ -1,5 +1,6 @@
 package mft.view;
 
+<<<<<<< HEAD
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -55,5 +56,16 @@ public class borrowFrameController implements Initializable {
 
         borrowTbl.getColumns().addAll(idcol,personCol,bookCol,borrowDateCol,returnDateCol);
         borrowTbl.setItems(borrows);
+=======
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class borrowFrameController implements Initializable {
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+
+>>>>>>> origin/master
     }
 }
