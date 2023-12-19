@@ -16,7 +16,7 @@ public class JdbcProvider {
         return jdbcProvider;
     }
 
-    public  Connection getConnection() throws SQLException {
+    public static Connection getConnection() throws SQLException {
         basicDataSource.setDriverClassName("oracle.jdbc.driver.OracleDriver");
         basicDataSource.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
         basicDataSource.setUsername("javase");

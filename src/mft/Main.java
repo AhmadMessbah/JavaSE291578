@@ -1,7 +1,6 @@
 package mft;
 
 import mft.model.entity.Receipt;
-import mft.model.repository.ReceiptDa;
 
 public class Main {
     public static void main(String[] args)throws Exception {

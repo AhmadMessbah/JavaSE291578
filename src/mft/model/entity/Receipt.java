@@ -9,10 +9,16 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @Getter
 @Setter
-@SuperBuilder(toBuilder = true)
+@SuperBuilder
 @ToString
 public class Receipt {
     private int id;
-    private String amount;
+    private int amount;
     private String description;
+
 }
+
+
+    
+
+
