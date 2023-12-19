@@ -33,7 +33,7 @@ public class BorrowService {
         }
     }
 
-    public List<Borrow> findAll(Borrow borrow) throws Exception{
+    public List<Borrow> findAll() throws Exception{
         try(BorrowDa borrowDa = new BorrowDa()) {
             return borrowDa.findAll();
         }
@@ -42,6 +42,11 @@ public class BorrowService {
     public Borrow findById(int id) throws Exception{
         try(BorrowDa borrowDa = new BorrowDa()) {
             return borrowDa.findById(id);
+        }
+    }
+    public List<Borrow> findByPersonId(int personId) throws Exception{
+        try(BorrowDa borrowDa = new BorrowDa()) {
+            return borrowDa.findByPersonId(personId);
         }
     }
 }

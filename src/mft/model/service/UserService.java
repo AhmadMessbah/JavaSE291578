@@ -50,6 +50,12 @@ public class UserService {
         }
     }
 
+    public List<User> findByAll( String username) throws Exception {
+        try (UserDa userDa = new UserDa()) {
+            return userDa.findByAll( username);
+        }
+    }
+
     public User findById(int id) throws Exception {
         try (UserDa userDa = new UserDa()) {
             return userDa.findById(id);
@@ -57,6 +63,12 @@ public class UserService {
     }
 
     public User findByUsername(String username) throws Exception {
+        try (UserDa userDa = new UserDa()) {
+            return userDa.findByUsername(username);
+        }
+    }
+
+    public User findByUsernameAndPassword(String username,String password) throws Exception {
         try (UserDa userDa = new UserDa()) {
             return userDa.findByUsername(username);
         }

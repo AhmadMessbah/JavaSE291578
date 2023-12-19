@@ -3,7 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -13,9 +16,9 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:controller="mft.view.UserFrameController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="376.0" prefWidth="319.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="339.0" prefWidth="670.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mft.view.UserFrameController">
    <children>
-      <GridPane layoutX="60.0" layoutY="110.0">
+      <GridPane layoutX="46.0" layoutY="75.0" prefHeight="141.0" prefWidth="227.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="95.0" minWidth="10.0" prefWidth="68.0" />
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="132.0" />
@@ -30,9 +33,9 @@
             <Label text="Username :" GridPane.rowIndex="1" />
             <Label text="Password :" GridPane.rowIndex="2" />
             <Label text="Active :" GridPane.rowIndex="3" />
-            <TextField fx:id="idTxt" prefWidth="127.0" GridPane.columnIndex="1" />
+            <TextField fx:id="idTxt" disable="true" prefWidth="127.0" GridPane.columnIndex="1" />
             <TextField fx:id="usernameTxt" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="passwordTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PasswordField fx:id="passwordTxt" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Id :" />
             <RadioButton fx:id="enableRdo" mnemonicParsing="false" selected="true" text="Enable" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <toggleGroup>
@@ -46,11 +49,6 @@
             </RadioButton>
          </children>
       </GridPane>
-      <Label alignment="CENTER" layoutX="129.0" layoutY="49.0" text="Log in" textFill="#42975f">
-         <font>
-            <Font name="Lucida Bright Demibold" size="20.0" />
-         </font>
-      </Label>
       <HBox layoutX="46.0" layoutY="278.0" prefHeight="17.0" prefWidth="227.0" spacing="10.0">
          <children>
             <Button fx:id="saveBtn" mnemonicParsing="false" prefHeight="25.0" prefWidth="70.0" text="Save" />
@@ -61,5 +59,18 @@
             <Insets />
          </opaqueInsets>
       </HBox>
+      <TextField fx:id="searchTxt" layoutX="328.0" layoutY="50.0" prefHeight="25.0" prefWidth="207.0" />
+      <TableView fx:id="userTbl" layoutX="328.0" layoutY="80.0" prefHeight="224.0" prefWidth="304.0">
+        <columns>
+          <TableColumn prefWidth="75.0" />
+          <TableColumn prefWidth="75.0" />
+        </columns>
+      </TableView>
+      <Button fx:id="searchBtn" layoutX="542.0" layoutY="50.0" mnemonicParsing="false" prefHeight="7.0" prefWidth="88.0" style="-fx-background-color: #a2b874;" text="searsh" textFill="#52544f">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Label fx:id="msgLbl" layoutX="46.0" layoutY="223.0" prefHeight="17.0" prefWidth="200.0" text="please change your username" textFill="#c60303" visible="false" />
    </children>
 </Pane>
