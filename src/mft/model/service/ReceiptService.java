@@ -53,7 +53,7 @@ public class ReceiptService {
 
     public Receipt findByDescription(String description) throws Exception {
         try (ReceiptRepository repository = new ReceiptRepository()) {
-            return repository.findByDescription(description);
+            return (Receipt) repository.findByDescription(description);
         }
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 public class ReceiptRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement statement;
+    private Receipt receipt;
 
 
     public Receipt save(Receipt receipt) throws Exception {
@@ -104,25 +105,28 @@ public class ReceiptRepository implements AutoCloseable {
 
         return receipt;
     }
-    public Receipt findByAmount(Integer amount) throws Exception {
-        System.out.println("ReceiptRepository-FindByAmount");
+    public  Receipt findByAmount(int amount) throws Exception {
         connection = JdbcProvider.getJdbcProvider().getConnection();
-    statement = connection.prepareStatement(
-"SELECT * FROM receipt_tbl WHERE amount=?"
+        statement = connection.prepareStatement(
+                "SELECT * FROM receipt_tbl WHERE ID=?"
         );
+        statement.setInt(1, amount);
         ResultSet resultSet = statement.executeQuery();
+
         Receipt receipt = null;
-if (resultSet.next()){
+        while (resultSet.next()) {
             receipt =
- Receipt
-.builder()
-.id(resultSet.getInt("ID"))
-.amount(Integer.parseInt(resultSet.getString("Amount")))
- .description(resultSet.getString("description"))
- .build();
+                    Receipt
+                            .builder()
+                            .id(resultSet.getInt("ID"))
+                            .amount(Integer.parseInt(resultSet.getString("Amount")))
+                            .description(resultSet.getString("description"))
+                            .build();
         }
-return receipt;
+
+        return receipt;
     }
+
     public Receipt findByDescription(String description) throws Exception {
         System.out.println("RecpectRepository - FindByDescraption");
         connection = JdbcProvider.getJdbcProvider().getConnection();

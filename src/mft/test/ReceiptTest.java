@@ -13,7 +13,7 @@ public class ReceiptTest {
         // true));
         //  System.out.println(ReceiptController.getController().remove(141));
         // System.out.println(ReceiptController.getController().findAll());
-        //  System.out.println(ReceiptController.getController().findById(141));
-      //  System.out.println(ReceiptController.getController().findByDescription("lrlrl"));
+        //System.out.println(ReceiptController.getController().findById(1));
+      //System.out.println(ReceiptController.getController().findByDescription("LevaZiaei"));
     }}
 
