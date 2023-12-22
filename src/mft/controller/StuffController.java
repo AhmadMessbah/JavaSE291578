@@ -6,6 +6,7 @@ import mft.model.entity.Stuff;
 import mft.model.service.PersonService;
 import mft.model.service.StuffService;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class StuffController {
@@ -16,8 +17,7 @@ public class StuffController {
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", groupTitle)) {
                 Stuff stuff = Stuff.builder().name(name).brand(brand).groupTitle(groupTitle).build();
 
-//                StuffService.getService.save(stuff);
-                return stuff;
+                return StuffService.getService().save(stuff);
             }
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
@@ -30,11 +30,14 @@ public class StuffController {
             if (Pattern.matches("^[a-zA-Z\\s]{3,30}$", name) &&
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", brand) &&
                     Pattern.matches("^[a-zA-Z\\s]{3,30}$", groupTitle)) {
-                Stuff stuff = Stuff.builder().name(name).brand(brand).groupTitle(groupTitle).build();
+                Stuff stuff = Stuff
+                        .builder()
+                        .name(name)
+                        .brand(brand)
+                        .groupTitle(groupTitle)
+                        .build();
 
-//                StuffDa stuffDa = new StuffDa();
-//                stuffDa.save(stuff);
-                return stuff;
+                return StuffService.getService().edit(stuff);
             }
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
@@ -45,6 +48,15 @@ public class StuffController {
     public Stuff remove(Integer id) {
         try {
             return StuffService.getService().remove(id);
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Stuff> findAll() {
+        try {
+            return StuffService.getService().findAll();
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
             return null;
