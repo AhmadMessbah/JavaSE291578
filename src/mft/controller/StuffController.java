@@ -62,5 +62,22 @@ public class StuffController {
             return null;
         }
     }
+    public Stuff findById(Integer id) {
+        try {
+            return StuffService.getService().findById(id);
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return null;
+        }
+    }
+
+    public List<Stuff> findByFamily(String name) {
+        try {
+            return StuffService.getService().findByName(name);
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return null;
+        }
+    }
 
 }

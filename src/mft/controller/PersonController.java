@@ -80,7 +80,7 @@ public class PersonController {
 
     public Person findById(Integer id) {
         try {
-            return PersonService.getService().remove(id);
+            return PersonService.getService().findById(id);
         } catch (Exception e) {
             System.out.println("Error : " + e.getMessage());
             return null;
