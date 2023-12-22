@@ -1,7 +1,10 @@
 package mft.controller;
 
+import mft.model.entity.Person;
 import mft.model.repository.StuffDa;
 import mft.model.entity.Stuff;
+import mft.model.service.PersonService;
+import mft.model.service.StuffService;
 
 import java.util.regex.Pattern;
 
@@ -37,6 +40,15 @@ public class StuffController {
             System.out.println("Error : " + e.getMessage());
         }
         return null;
+    }
+
+    public Stuff remove(Integer id) {
+        try {
+            return StuffService.getService().remove(id);
+        } catch (Exception e) {
+            System.out.println("Error : " + e.getMessage());
+            return null;
+        }
     }
 
 }
