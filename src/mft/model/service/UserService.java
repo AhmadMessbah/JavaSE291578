@@ -50,9 +50,9 @@ public class UserService {
         }
     }
 
-    public List<User> findByAll( String username) throws Exception {
+    public List<User> findByAll(String searchText) throws Exception {
         try (UserDa userDa = new UserDa()) {
-            return userDa.findByAll( username);
+            return userDa.findByAll(searchText);
         }
     }
 

@@ -61,8 +61,8 @@ public class UserController {
         return UserService.getService().findAll();
     }
 
-    public List<User> findByAll( String username) throws Exception {
-        return UserService.getService().findByAll( username);
+    public List<User> findByAll(String searchText) throws Exception {
+        return UserService.getService().findByAll(searchText);
     }
 
     public User findById(Integer id) throws Exception {

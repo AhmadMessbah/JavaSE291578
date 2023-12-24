@@ -8,7 +8,7 @@ public class Start extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Scene scene = new Scene(
-                FXMLLoader.load(getClass().getResource(("view/ReceiptFrame.fxml")))
+                FXMLLoader.load(getClass().getResource(("view/userFrame.fxml")))
         );
         System.out.println("Receipt Infor");
         primaryStage.setScene(scene);
