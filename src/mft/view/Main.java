@@ -1,12 +1,12 @@
 package mft.view;
-
+import mft.model.entity.Person;
 import mft.model.entity.Receipt;
 
 public class Main {
    public static void main(String[] args)throws Exception {
-    /* Person person = Person.builder().name("reza").family("rezaii").build();
+     Person person = Person.builder().name("reza").family("rezaii").build();
 
-    PersonDa personDa = new PersonDa();
+    /*PersonDa personDa = new PersonDa();
          System.out.println(personDa.save(person));
 
       System.out.println(person + " Saved");
