@@ -86,13 +86,13 @@ public class UserDa implements Da<User>, AutoCloseable {
         return userList;
     }
 
-    public List<User> findByAll(String username ) throws Exception {
+    public List<User> findByAll(String searchText ) throws Exception {
         connection = JdbcProvider.getJdbcProvider().getConnection();
         preparedStatement = connection.prepareStatement(
-                "SELECT * FROM USER_TBL WHERE USERNAME LIKE ? "
+                "SELECT * FROM USER_TBL WHERE ID LIKE ? or USERNAME LIKE ? "
         );
-//        preparedStatement.setString(1, id);
-        preparedStatement.setString(1, username+"%");
+        preparedStatement.setString(1, searchText);
+        preparedStatement.setString(2, searchText);
         ResultSet resultSet = preparedStatement.executeQuery();
         List<User> userList = new ArrayList<>();
 

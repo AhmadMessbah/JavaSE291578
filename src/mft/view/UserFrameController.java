@@ -34,6 +34,9 @@ public class UserFrameController implements Initializable {
     @FXML
     private TableView<User> userTbl;
 
+    @FXML
+    private RadioButton enableRdo,disableRdo;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         resetForm();
@@ -95,7 +98,11 @@ public class UserFrameController implements Initializable {
             idTxt.setText(String.valueOf(user.getId()));
             usernameTxt.setText(user.getUsername());
             passwordTxt.setText(user.getPassword());
-//            radioButton.setToggleGroup(user.isActive());
+            if(user.isActive()) {
+                enableRdo.fire();
+            }else{
+                disableRdo.fire();
+            }
 
         });
         searchTxt.setOnKeyReleased((event) -> {
